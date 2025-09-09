@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cory Café - Sabores Auténticos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables CSS - Nueva Paleta Plant Café */
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #F5F5DC;
+            --accent-color: #A0522D;
+            --dark-brown: #654321;
+            --light-brown: #CD853F;
+            --olive-green: #556B2F;
+            --sage-green: #6B8E23;
+            --forest-green: #808000;
+            --cream: #FFF8DC;
+            --beige: #F5E6D3;
+            --text-dark: #3a3a3a;
+            --text-light: #666;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+            --max-width: 1400px;
+        }
+
+        /* Reset y base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animaciones generales */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Header mejorado */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 0.8rem 0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            animation: logoFloat 3s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        .logo-image {
+            width: 65px;
+            height: 65px;
+            margin-right: 15px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(139, 69, 19, 0.3);
+            transition: var(--transition);
+        }
+
+        .logo-image:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 5px 20px rgba(139, 69, 19, 0.4);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            position: relative;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+            background: rgba(139, 69, 19, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: var(--primary-color);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .nav-menu a:hover::after {
+            width: 80%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23F5F5DC" width="1200" height="800"/><circle fill="%238B4513" cx="200" cy="200" r="50" opacity="0.3"/><circle fill="%23A0522D" cx="800" cy="300" r="70" opacity="0.2"/><circle fill="%23556B2F" cx="600" cy="500" r="40" opacity="0.4"/><rect fill="%236B8E23" x="300" y="400" width="100" height="60" rx="30" opacity="0.3"/><rect fill="%23CD853F" x="900" y="600" width="80" height="80" rx="40" opacity="0.2"/></svg>') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            color: var(--white);
+            max-width: 700px;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            background: var(--accent-color);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Contenedor principal centrado */
+        .main-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Secciones generales */
+        section {
+            padding: 6rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .section-content {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 3.5rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        /* Sección Nosotros */
+        .about {
+            background: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .about-text h3 {
+            color: var(--primary-color);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(45deg, var(--beige), var(--sage-green));
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            color: var(--primary-color);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Sección Menú */
+        .menu {
+            background: var(--secondary-color);
+        }
+
+        .menu-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 3.5rem;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .filter-btn {
+            padding: 1rem 1.8rem;
+            background: var(--white);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .search-box {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .search-input {
+            padding: 1.2rem 1.8rem 1.2rem 3.5rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            width: 100%;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        .search-input:focus {
+            box-shadow: 0 0 20px rgba(139, 69, 19, 0.3);
+            transform: scale(1.02);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .menu-item {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .menu-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .menu-item-image {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            margin: 0 auto 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover .menu-item-image {
+            animation: pulse 0.6s ease;
+            transform: rotate(5deg);
+        }
+
+        .menu-item.categoria-cafe .menu-item-image {
+            background: linear-gradient(135deg, var(--dark-brown), var(--primary-color));
+        }
+
+        .menu-item.categoria-postre .menu-item-image {
+            background: linear-gradient(135deg, var(--light-brown), var(--accent-color));
+        }
+
+        .menu-item.categoria-bebida .menu-item-image {
+            background: linear-gradient(135deg, var(--olive-green), var(--sage-green));
+        }
+
+        .menu-item.categoria-desayuno .menu-item-image {
+            background: linear-gradient(135deg, var(--accent-color), var(--light-brown));
+        }
+
+        .menu-item.categoria-sandwich .menu-item-image {
+            background: linear-gradient(135deg, var(--sage-green), var(--forest-green));
+        }
+
+        .menu-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .menu-item p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Etiquetas dietarias - Solo para algunos productos */
+        .diet-tags {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .diet-tag {
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .diet-tag.vegan {
+            background: linear-gradient(135deg, var(--sage-green), var(--forest-green));
+        }
+
+        .diet-tag.keto {
+            background: linear-gradient(135deg, var(--dark-brown), var(--primary-color));
+        }
+
+        .diet-tag.sugar-free {
+            background: linear-gradient(135deg, var(--olive-green), var(--sage-green));
+        }
+
+        /* Sección Contacto */
+        .contact {
+            background: var(--secondary-color);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 1.6rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            background: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-right: 1.2rem;
+            width: 25px;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem;
+            border: 2px solid #eee;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(139, 69, 19, 0.2);
+            transform: scale(1.02);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+
+        .social-links a {
+            background: var(--primary-color);
+            color: var(--white);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 2rem;
+            text-align: center;
+            color: #999;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        /* Botón ir arriba */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: var(--white);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Toast notifications */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 10px;
+            z-index: 10000;
+            animation: slideInRight 0.5s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-width: 350px;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-menu {
+                gap: 2rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: var(--shadow);
+                transform: translateY(-100%);
+                transition: var(--transition);
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .container,
+            .main-container {
+                padding: 0 1.5rem;
+            }
+
+            .menu-controls {
+                justify-content: center;
+                gap: 0.8rem;
+            }
+
+            .filter-btn {
+                padding: 0.8rem 1.3rem;
+                font-size: 0.9rem;
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .logo-image {
+                width: 55px;
+                height: 55px;
+            }
+
+            .logo-text {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .logo-text {
+                font-size: 1.6rem;
+            }
+
+            .logo-image {
+                width: 50px;
+                height: 50px;
+            }
+
+            .menu-item {
+                padding: 2rem 1.5rem;
+            }
+
+            .btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#inicio" class="logo-container">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1757452375/gemini_images/tckyj25v4tb6jltdswab.png" alt="Cory's Cafe Logo" class="logo-image">
+                    <span class="logo-text">Cory Café</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nuestra Historia</a></li>
+                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content fade-in">
+            <h1>Bienvenidos a Cory Café</h1>
+            <p>Donde cada taza cuenta una historia auténtica</p>
+            <a href="#menu" class="btn">Ver Nuestro Menú</a>
+        </div>
+    </section>
+
+    <!-- Sección Nosotros -->
+    <section id="nosotros" class="about">
+        <div class="section-content">
+            <h2 class="section-title fade-in">Nuestra Historia</h2>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h3>Una Tradición de Sabor</h3>
+                    <p>Cory Café nació del amor por la tradición cafetera y el deseo de crear un espacio acogedor donde cada visita sea una experiencia memorable. Ubicados en el corazón de Providencia, hemos sido parte de la comunidad chilena desde 2018.</p>
+                    
+                    <h3>Compromiso con la Calidad</h3>
+                    <p>Desde nuestros inicios, hemos estado sirviendo los mejores cafés, pasteles y preparaciones, manteniendo recetas tradicionales que combinan lo mejor de la repostería europea con el sabor chileno. Seleccionamos cuidadosamente nuestros granos de café y trabajamos con proveedores locales.</p>
+                    
+                    <h3>Nuestra Filosofía</h3>
+                    <p>Cada taza de café es preparada con dedicación, cada postre es horneado con amor, y cada cliente es recibido como parte de nuestra familia. Creemos que un buen café no es solo una bebida, es un momento de pausa y disfrute en el día a día.</p>
+                </div>
+                <div class="about-image fade-in">
+                    <i class="fas fa-store"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Menú -->
+    <section id="menu" class="menu">
+        <div class="section-content">
+            <h2 class="section-title fade-in">Nuestro Menú</h2>
+            
+            <div class="search-box fade-in">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar productos...">
+                </div>
+            </div>
+
+            <div class="menu-controls fade-in">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="cafe">Cafés</button>
+                <button class="filter-btn" data-filter="postre">Postres</button>
+                <button class="filter-btn" data-filter="bebida">Bebidas</button>
+                <button class="filter-btn" data-filter="desayuno">Desayunos</button>
+                <button class="filter-btn" data-filter="sandwich">Sandwiches</button>
+            </div>
+
+            <div class="menu-grid" id="menuGrid">
+                <!-- Cafés Calientes -->
+                <div class="menu-item categoria-cafe fade-in" data-category="cafe">
+                    <div class="menu-item-image">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Americano</h3>
+                    <p>Café espresso diluido con agua caliente, intenso y aromático</p>
+                    <div class="price">$2.500</div>
+                </div>
+
+                <div class="menu-item categoria-cafe fade-in" data-category="cafe">
+                    <div class="menu-item-image">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <h3>Cappuccino</h3>
+                    <p>Espresso con leche vaporizada y espuma cremosa perfecta</p>
+                    <div class="price">$3.200</div>
+                </div>
+
+                <div class="menu-item categoria-cafe fade-in" data-category="cafe">
+                    <div class="menu-item-image">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Latte</h3>
+                    <p>Café con abundante leche vaporizada y un toque de espuma</p>
+                    <div class="price">$3.500</div>
+                </div>
+
+                <div class="menu-item categoria-cafe fade-in" data-category="cafe">
+                    <div class="menu-item-image">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Espresso</h3>
+                    <div class="diet-tags">
+                        <span class="diet-tag keto">Keto</span>
+                    </div>
+                    <p>Café puro, concentrado y aromático, la base de todo buen café</p>
+                    <div class="price">$2.200</div>
+                </div>
+
+                <div class="menu-item categoria-cafe fade-in" data-category="cafe">
+                    <div class="menu-item-image">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Mocha</h3>
+                    <p>Café espresso con chocolate, leche cremosa y crema batida</p>
+                    <div class="price">$4.200</div>
+                </div>
+
+                <div class="menu-item categoria-cafe fade-in" data-category="cafe">
+                    <div class="menu-item-image">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Flat White</h3>
+                    <p>Café doble shot con microespuma de leche, estilo australiano</p>
+                    <div class="price">$3.800</div>
+                </div>
+
+                <div class="menu-item categoria-cafe fade-in" data-category="cafe">
+                    <div class="menu-item-image">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Cortado</h3>
+                    <p>Espresso "cortado" con un poco de leche tibia</p>
+                    <div class="price">$2.800</div>
+                </div>
+
+                <div class="menu-item categoria-cafe fade-in" data-category="cafe">
+                    <div class="menu-item-image">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <h3>Macchiato</h3>
+                    <p>Espresso "manchado" con una cucharada de espuma de leche</p>
+                    <div class="price">$2.900</div>
+                </div>
+
+                <!-- Postres -->
+                <div class="menu-item categoria-postre fade-in" data-category="postre">
+                    <div class="menu-item-image">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <h3>Cheesecake</h3>
+                    <p>Clásica tarta de queso con base de galletas y frutos rojos</p>
+                    <div class="price">$4.800</div>
+                </div>
+
+                <div class="menu-item categoria-postre fade-in" data-category="postre">
+                    <div class="menu-item-image">
+                        <i class="fas fa-cookie"></i>
+                    </div>
+                    <h3>Brownie</h3>
+                    <p>Brownie de chocolate húmedo con nueces y helado de vainilla</p>
+                    <div class="price">$3.800</div>
+                </div>
+
+                <div class="menu-item categoria-postre fade-in" data-category="postre">
+                    <div class="menu-item-image">
+                        <i class="fas fa-cookie-bite"></i>
+                    </div>
+                    <h3>Mil Hojas</h3>
+                    <p>Delicado postre de hojaldre con crema pastelera y manjar</p>
+                    <div class="price">$4.200</div>
+                </div>
+
+                <div class="menu-item categoria-postre fade-in" data-category="postre">
+                    <div class="menu-item-image">
+                        <i class="fas fa-ice-cream"></i>
+                    </div>
+                    <h3>Tiramisú</h3>
+                    <p>Postre italiano con café, mascarpone y cacao en polvo</p>
+                    <div class="price">$5.200</div>
+                </div>
+
+                <div class="menu-item categoria-postre fade-in" data-category="postre">
+                    <div class="menu-item-image">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <h3>Torta de Chocolate</h3>
+                    <p>Esponjosa torta de chocolate con ganache y decoración artesanal</p>
+                    <div class="price">$4.500</div>
+                </div>
+
+                <div class="menu-item categoria-postre fade-in" data-category="postre">
+                    <div class="menu-item-image">
+                        <i class="fas fa-cookie"></i>
+                    </div>
+                    <h3>Alfajores</h3>
+                    <p>Tradicionales alfajores chilenos con manjar y coco rallado</p>
+                    <div class="price">$2.200</div>
+                </div>
+
+                <div class="menu-item categoria-postre fade-in" data-category="postre">
+                    <div class="menu-item-image">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <h3>Lemon Pie</h3>
+                    <div class="diet-tags">
+                        <span class="diet-tag sugar-free">Sin Azúcar</span>
+                    </div>
+                    <p>Tarta de limón con merengue, versión sin azúcar agregada</p>
+                    <div class="price">$4.600</div>
+                </div>
+
+                <div class="menu-item categoria-postre fade-in" data-category="postre">
+                    <div class="menu-item-image">
+                        <i class="fas fa-cookie-bite"></i>
+                    </div>
+                    <h3>Tres Leches</h3>
+                    <p>Clásico postre latinoamericano empapado en tres tipos de leche</p>
+                    <div class="price">$4.800</div>
+                </div>
+
+                <!-- Bebidas Frías -->
+                <div class="menu-item categoria-bebida fade-in" data-category="bebida">
+                    <div class="menu-item-image">
+                        <i class="fas fa-glass-water"></i>
+                    </div>
+                    <h3>Café Helado</h3>
+                    <p>Refrescante café frío con hielo y un toque de crema</p>
+                    <div class="price">$3.800</div>
+                </div>
+
+                <div class="menu-item categoria-bebida fade-in" data-category="bebida">
+                    <div class="menu-item-image">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Té Helado</h3>
+                    <p>Té frío con limón, menta fresca y endulzante natural</p>
+                    <div class="price">$2.800</div>
+                </div>
+
+                <div class="menu-item categoria-bebida fade-in" data-category="bebida">
+                    <div class="menu-item-image">
+                        <i class="fas fa-blender"></i>
+                    </div>
+                    <h3>Smoothie de Frutas</h3>
+                    <p>Batido de frutas naturales con yogurt y miel</p>
+                    <div class="price">$4.500</div>
+                </div>
+
+                <div class="menu-item categoria-bebida fade-in" data-category="bebida">
+                    <div class="menu-item-image">
+                        <i class="fas fa-cocktail"></i>
+                    </div>
+                    <h3>Limonana</h3>
+                    <p>Refrescante bebida de limón con menta y hielo granizado</p>
+                    <div class="price">$3.200</div>
+                </div>
+
+                <div class="menu-item categoria-bebida fade-in" data-category="bebida">
+                    <div class="menu-item-image">
+                        <i class="fas fa-glass-whiskey"></i>
+                    </div>
+                    <h3>Chocolate Frío</h3>
+                    <p>Chocolate frío cremoso con crema batida y chispas</p>
+                    <div class="price">$4.200</div>
+                </div>
+
+                <div class="menu-item categoria-bebida fade-in" data-category="bebida">
+                    <div class="menu-item-image">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Frappé</h3>
+                    <p>Café batido con hielo, leche y crema, estilo griego</p>
+                    <div class="price">$4.000</div>
+                </div>
+
+                <div class="menu-item categoria-bebida fade-in" data-category="bebida">
+                    <div class="menu-item-image">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Jugo Natural</h3>
+                    <div class="diet-tags">
+                        <span class="diet-tag vegan">Vegano</span>
+                    </div>
+                    <p>Jugos naturales de frutas frescas de temporada</p>
+                    <div class="price">$3.500</div>
+                </div>
+
+                <!-- Desayunos -->
+                <div class="menu-item categoria-desayuno fade-in" data-category="desayuno">
+                    <div class="menu-item-image">
+                        <i class="fas fa-bread-slice"></i>
+                    </div>
+                    <h3>Desayuno Completo</h3>
+                    <p>Croissant, mermelada casera, mantequilla, café y jugo natural</p>
+                    <div class="price">$6.800</div>
+                </div>
+
+                <div class="menu-item categoria-desayuno fade-in" data-category="desayuno">
+                    <div class="menu-item-image">
+                        <i class="fas fa-egg"></i>
+                    </div>
+                    <h3>Tostadas Francesas</h3>
+                    <p>Pan brioche con huevo, canela, miel y frutas de temporada</p>
+                    <div class="price">$5.800</div>
+                </div>
+
+                <div class="menu-item categoria-desayuno fade-in" data-category="desayuno">
+                    <div class="menu-item-image">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Yogurt con Granola</h3>
+                    <div class="diet-tags">
+                        <span class="diet-tag vegan">Vegano</span>
+                    </div>
+                    <p>Yogurt vegetal con granola casera, frutas frescas y miel de agave</p>
+                    <div class="price">$4.200</div>
+                </div>
+
+                <div class="menu-item categoria-desayuno fade-in" data-category="desayuno">
+                    <div class="menu-item-image">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h3>Avena con Frutas</h3>
+                    <p>Avena cremosa con frutas de temporada, nueces y canela</p>
+                    <div class="price">$3.800</div>
+                </div>
+
+                <div class="menu-item categoria-desayuno fade-in" data-category="desayuno">
+                    <div class="menu-item-image">
+                        <i class="fas fa-bread-slice"></i>
+                    </div>
+                    <h3>Tostadas con Palta</h3>
+                    <p>Pan artesanal tostado con palta, tomate cherry y sal de mar</p>
+                    <div class="price">$4.500</div>
+                </div>
+
+                <div class="menu-item categoria-desayuno fade-in" data-category="desayuno">
+                    <div class="menu-item-image">
+                        <i class="fas fa-egg"></i>
+                    </div>
+                    <h3>Huevos Benedictinos</h3>
+                    <p>Huevos pochados sobre muffin inglés con salsa holandesa</p>
+                    <div class="price">$7.200</div>
+                </div>
+
+                <!-- Sandwiches y Salados -->
+                <div class="menu-item categoria-sandwich fade-in" data-category="sandwich">
+                    <div class="menu-item-image">
+                        <i class="fas fa-hamburger"></i>
+                    </div>
+                    <h3>Sándwich Completo</h3>
+                    <p>Pan amasado con palta, tomate, mayonesa y pollo desmenuzado</p>
+                    <div class="price">$5.200</div>
+                </div>
+
+                <div class="menu-item categoria-sandwich fade-in" data-category="sandwich">
+                    <div class="menu-item-image">
+                        <i class="fas fa-cheese"></i>
+                    </div>
+                    <h3>Tostado Mixto</h3>
+                    <p>Pan tostado con jamón, queso derretido y tomate</p>
+                    <div class="price">$4.500</div>
+                </div>
+
+                <div class="menu-item categoria-sandwich fade-in" data-category="sandwich">
+                    <div class="menu-item-image">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Sándwich Vegetariano</h3>
+                    <div class="diet-tags">
+                        <span class="diet-tag vegan">Vegano</span>
+                    </div>
+                    <p>Pan integral con palta, tomate, lechuga, brotes y hummus</p>
+                    <div class="price">$4.800</div>
+                </div>
+
+                <div class="menu-item categoria-sandwich fade-in" data-category="sandwich">
+                    <div class="menu-item-image">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h3>Sándwich de Atún</h3>
+                    <div class="diet-tags">
+                        <span class="diet-tag keto">Keto</span>
+                    </div>
+                    <p>Pan integral con atún, mayonesa de palta, tomate y lechuga</p>
+                    <div class="price">$4.200</div>
+                </div>
+
+                <div class="menu-item categoria-sandwich fade-in" data-category="sandwich">
+                    <div class="menu-item-image">
+                        <i class="fas fa-hamburger"></i>
+                    </div>
+                    <h3>Club Sandwich</h3>
+                    <p>Triple sándwich con pollo, bacon, lechuga, tomate y mayonesa</p>
+                    <div class="price">$6.500</div>
+                </div>
+
+                <div class="menu-item categoria-sandwich fade-in" data-category="sandwich">
+                    <div class="menu-item-image">
+                        <i class="fas fa-bread-slice"></i>
+                    </div>
+                    <h3>Panini Italiano</h3>
+                    <p>Pan ciabatta con jamón serrano, mozzarella y tomate seco</p>
+                    <div class="price">$5.800</div>
+                </div>
+
+                <div class="menu-item categoria-sandwich fade-in" data-category="sandwich">
+                    <div class="menu-item-image">
+                        <i class="fas fa-cheese"></i>
+                    </div>
+                    <h3>Quesadilla</h3>
+                    <p>Tortilla de trigo con queso derretido, pollo y pimiento</p>
+                    <div class="price">$5.500</div>
+                </div>
+
+                <div class="menu-item categoria-sandwich fade-in" data-category="sandwich">
+                    <div class="menu-item-image">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Wrap Caesar</h3>
+                    <p>Tortilla integral con pollo, lechuga, parmesano y aderezo caesar</p>
+                    <div class="price">$5.200</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="contact">
+        <div class="section-content">
+            <h2 class="section-title fade-in">Contáctanos</h2>
+            <div class="contact-content">
+                <div class="contact-info fade-in">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Av. Providencia 1234, Providencia, Santiago</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+56 2 2345 6789</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@corycafe.cl</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Lun-Dom: 7:00 - 22:00</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-wifi"></i>
+                        <span>WiFi gratuito para clientes</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-car"></i>
+                        <span>Estacionamiento disponible</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Sucursal Las Condes: Av. Apoquindo 5678</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Delivery: +56 9 8765 4321</span>
+                    </div>
+                </div>
+                
+                <form class="contact-form fade-in" id="contactForm">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary-color); font-family: 'Playfair Display', serif;">Envíanos un Mensaje</h3>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono (opcional)</label>
+                        <input type="tel" id="telefono" name="telefono">
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos cómo podemos ayudarte..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Cory Café</h3>
+                <p>Tu lugar favorito para disfrutar del mejor café y postres en un ambiente acogedor y familiar en el corazón de Santiago.</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Horarios</h3>
+                <p>Lunes - Viernes: 7:00 - 22:00</p>
+                <p>Sábados: 8:00 - 23:00</p>
+                <p>Domingos: 8:00 - 21:00</p>
+                <p>Festivos: 9:00 - 20:00</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Ubicaciones</h3>
+                <p>Providencia: Av. Providencia 1234</p>
+                <p>Las Condes: Av. Apoquindo 5678</p>
+                <p>Ñuñoa: Av. Irarrázaval 2468</p>
+                <p>Vitacura: Av. Vitacura 9876</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Servicios</h3>
+                <p>Café para llevar</p>
+                <p>Delivery en Santiago</p>
+                <p>Catering para eventos</p>
+                <p>Eventos corporativos</p>
+                <p>WiFi gratuito</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Cory Café. Todos los derechos reservados. | Diseñado con ❤️ para los amantes del café chileno</p>
+        </div>
+    </footer>
+
+    <!-- Botón Ir Arriba -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Variables globales
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const scrollTop = document.getElementById('scrollTop');
+        const searchInput = document.getElementById('searchInput');
+        const menuGrid = document.getElementById('menuGrid');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const contactForm = document.getElementById('contactForm');
+        let menuItems = [];
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMenu();
+            setupEventListeners();
+            setupScrollAnimations();
+        });
+
+        // Configurar event listeners
+        function setupEventListeners() {
+            // Toggle menú móvil
+            menuToggle.addEventListener('click', toggleMenu);
+
+            // Cerrar menú al hacer click en enlace
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Scroll suave para enlaces
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const offsetTop = target.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Botón scroll to top
+            scrollTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Mostrar/ocultar botón scroll top
+            window.addEventListener('scroll', handleScroll);
+
+            // Filtros de menú
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', handleFilter);
+            });
+
+            // Búsqueda en tiempo real
+            searchInput.addEventListener('input', debounce(handleSearch, 300));
+
+            // Formulario de contacto
+            contactForm.addEventListener('submit', handleFormSubmit);
+        }
+
+        // Inicializar menú
+        function initializeMenu() {
+            menuItems = Array.from(document.querySelectorAll('.menu-item'));
+        }
+
+        // Toggle menú móvil
+        function toggleMenu() {
+            navMenu.classList.toggle('active');
+        }
+
+        // Manejar scroll
+        function handleScroll() {
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('show');
+            } else {
+                scrollTop.classList.remove('show');
+            }
+
+            // Header background opacity
+            const header = document.querySelector('header');
+            if (window.pageYOffset > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        }
+
+        // Manejar filtros
+        function handleFilter(e) {
+            const filter = e.target.dataset.filter;
+            
+            // Actualizar botón activo
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+
+            // Filtrar elementos con animación suave
+            menuItems.forEach((item, index) => {
+                const category = item.dataset.category;
+                if (filter === 'all' || category === filter) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, index * 50);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+
+            // Limpiar búsqueda
+            searchInput.value = '';
+        }
+
+        // Manejar búsqueda
+        function handleSearch(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            menuItems.forEach((item, index) => {
+                const title = item.querySelector('h3').textContent.toLowerCase();
+                const description = item.querySelector('p').textContent.toLowerCase();
+                const tags = Array.from(item.querySelectorAll('.diet-tag')).map(tag => tag.textContent.toLowerCase()).join(' ');
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm) || tags.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, index * 30);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+
+            // Si hay búsqueda, resetear filtros
+            if (searchTerm) {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('[data-filter="all"]').classList.add('active');
+            }
+        }
+
+        // Manejar envío de formulario
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+            
+            btn.textContent = 'Enviando...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                showToast('¡Mensaje enviado correctamente!', 'success');
+                btn.textContent = originalText;
+                btn.disabled = false;
+                contactForm.reset();
+            }, 1500);
+        }
+
+        // Sistema de notificaciones toast
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            
+            const colors = {
+                success: '#4CAF50',
+                error: '#e74c3c',
+                info: '#3498db',
+                warning: '#f39c12'
+            };
+            
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${colors[type] || colors.success};
+                color: white;
+                padding: 1.2rem 2.5rem;
+                border-radius: 10px;
+                z-index: 10000;
+                animation: slideInRight 0.5s ease;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                max-width: 350px;
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOutRight 0.5s ease forwards';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        // Animaciones de scroll
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = '0.1s';
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observar elementos con clase fade-in
+            document.querySelectorAll('.fade-in').forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.05}s`;
+                observer.observe(el);
+            });
+        }
+
+        // Función debounce para optimizar búsqueda
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Efectos adicionales
+        document.addEventListener('DOMContentLoaded', function() {
+            // Efecto de escritura para el eslogan del hero
+            const heroText = document.querySelector('.hero p');
+            if (heroText) {
+                const originalText = heroText.textContent;
+                heroText.textContent = '';
+                
+                setTimeout(() => {
+                    let i = 0;
+                    const typeWriter = () => {
+                        if (i < originalText.length) {
+                            heroText.textContent += originalText.charAt(i);
+                            i++;
+                            setTimeout(typeWriter, 50);
+                        }
+                    };
+                    typeWriter();
+                }, 1000);
+            }
+
+            // Efecto hover mejorado para las tarjetas de menú
+            menuItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                    this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.15)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                });
+            });
+
+            // Efecto ripple mejorado en botones
+            document.querySelectorAll('.btn, .filter-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        background: rgba(255, 255, 255, 0.4);
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: ripple 0.6s ease-out;
+                        pointer-events: none;
+                    `;
+                    
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // Mejora en la navegación móvil
+            document.addEventListener('click', function(e) {
+                if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Efecto parallax suave para el hero
+        let ticking = false;
+        function updateParallax() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.2;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translate3d(0, ${rate}px, 0)`;
+            }
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+        });
+
+        // Agregar estilos para el efecto ripple
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+            
+            .menu-item {
+                transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            }
+            
+            .diet-tag {
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            
+            .diet-tag:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        // Detectar dispositivo móvil para optimizaciones
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (isMobile) {
+            // Desactivar animaciones complejas en móvil
+            document.documentElement.style.setProperty('--enable-parallax', 'none');
+            
+            // Mejorar rendimiento en touch
+            document.addEventListener('touchstart', function() {}, { passive: true });
+        }
+
+        console.log('🎉 Cory Café website loaded successfully with new plant-inspired palette!');
+    </script>
+</body>
+</html>
